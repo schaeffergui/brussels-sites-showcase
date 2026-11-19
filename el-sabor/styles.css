@@ -1,0 +1,232 @@
+/* El Sabor · Laeken — terre cuite, terre sombre, or, une touche de vert frais */
+@font-face{font-family:"Fraunces";src:url("fonts/fraunces-latin.woff2") format("woff2");font-weight:300 800;font-style:normal;font-display:swap}
+@font-face{font-family:"Fraunces";src:url("fonts/fraunces-italic-latin.woff2") format("woff2");font-weight:300 800;font-style:italic;font-display:swap}
+:root{
+  --earth:#2A160E;      /* fond nuit-terre */
+  --earth-2:#3A1F14;    /* sections */
+  --clay:#B4532A;       /* terre cuite (aplats, décor) */
+  --clay-dk:#7E3418;
+  --sand:#F5E9D6;       /* texte */
+  --sand-soft:#E3D2B8;
+  --gold:#E0A43A;       /* action */
+  --gold-lt:#F2C46B;    /* focus */
+  --leaf:#9CCB8A;       /* accent vert, lisible sur terre */
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(1.15rem,4.5vw,4rem); --wrap:1240px; --header-h:60px; --tap:48px; --dock-h:64px;
+  --ease:cubic-bezier(.22,.8,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 14px);scroll-padding-bottom:calc(var(--dock-h) + 24px + env(safe-area-inset-bottom,0px));background:var(--earth)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--earth);color:var(--sand);font:400 1.0625rem/1.6 var(--sans);overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{margin:0;font-family:var(--serif);font-weight:500;line-height:1;letter-spacing:-.02em}
+p,ul,figure{margin:0} ul{padding:0;list-style:none} a{color:inherit}
+.visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:where(a,button,[tabindex]):focus-visible{outline:3px solid var(--gold-lt);outline-offset:3px;border-radius:6px}
+.skip-link{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--gold);color:var(--earth);padding:.8rem 1rem;font-weight:650}
+.skip-link:focus{left:8px}
+
+.btn{display:inline-flex;min-height:var(--tap);border-radius:999px;text-decoration:none}
+.btn__face{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;min-height:var(--tap);padding:.8rem 1.45rem;border-radius:inherit;border:1.5px solid transparent;font:650 1.0625rem/1.1 var(--sans);transition:background-color .2s,color .2s,border-color .2s}
+.btn--gold .btn__face{background:var(--gold);color:var(--earth)}
+.btn--gold:hover .btn__face{background:var(--gold-lt)}
+.btn--line .btn__face{border-color:rgba(245,233,214,.7);color:var(--sand)}
+.btn--line:hover .btn__face{border-color:var(--gold-lt);color:var(--gold-lt)}
+.btn:focus-visible{border-radius:999px;outline-offset:4px}
+.btn--xl .btn__face{min-height:60px;padding:1rem 1.8rem;font-size:1.2rem}
+
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:var(--header-h);padding:env(safe-area-inset-top,0px) var(--gutter) 0;background:var(--earth)}
+.wordmark{display:inline-flex;align-items:center;min-height:var(--tap);font:italic 500 1.75rem/1 var(--serif);color:var(--gold);text-decoration:none}
+.nav{display:flex}
+.nav a{display:inline-flex;align-items:center;min-height:var(--tap);padding:0 .75rem;text-decoration:none}
+.nav a:hover{color:var(--gold-lt)}
+@media (max-width:420px){.wordmark{font-size:1.45rem}.nav a{padding:0 .4rem;font-size:1rem}}
+
+/* Ouverture : grande photo + texte sur un aplat terre cuite */
+.hero{display:grid;background:var(--clay-dk)}
+.hero__media{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--earth-2)}
+.hero__media picture{display:block;width:100%;height:100%}
+.hero__media img{width:100%;height:100%;object-fit:cover;transform-origin:50% 60%}
+.credit{position:absolute;right:.75rem;bottom:.75rem;max-width:calc(100% - 1.5rem);padding:.3rem .75rem;border-radius:999px;background:rgba(42,22,14,.88);color:var(--sand);font:500 .875rem/1.3 var(--sans)}
+.credit--tall{display:none}
+@media (min-width:60rem){.credit--wide{display:none}.credit--tall{display:block}}
+.hero__text{display:grid;gap:1.1rem;align-content:center;padding:2rem var(--gutter) 2.6rem}
+.hero__title{font-size:clamp(3rem,11vw,7.5rem);line-height:.92;max-width:11ch;color:var(--sand)}
+.hero__lede{font-size:1.2rem;line-height:1.5;max-width:34ch;color:var(--sand)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.6rem}
+@media (min-width:60rem){
+  .hero{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);min-height:calc(100svh - var(--header-h))}
+  .hero__media{aspect-ratio:auto;order:2}
+  .hero__text{padding:4rem clamp(2rem,4vw,4rem)}
+}
+
+/* Carte */
+.menu{max-width:var(--wrap);margin:0 auto;padding:clamp(4rem,9vw,8rem) var(--gutter)}
+.menu__head{display:grid;gap:1rem;margin-bottom:2.2rem}
+.menu__head h2{font-size:clamp(2.6rem,7vw,5.2rem)}
+.notice{max-width:60ch;padding:1rem 1.2rem;border-radius:12px;background:var(--earth-2);border-left:4px solid var(--gold);color:var(--sand)}
+.menu__grid{display:grid;gap:1.8rem}
+.stage{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:var(--earth-2)}
+.stage__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.stage__img.is-on{opacity:1}
+.stage.is-missing::after,.hero__media.is-missing::after{content:"Image indisponible";position:absolute;inset:0;display:grid;place-items:center;background:var(--earth-2);color:var(--sand-soft)}
+.caption{margin-top:.6rem;font-size:1rem;color:var(--sand-soft)}
+.filters{display:none;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.filter-ready .filters{display:flex}
+.filter{min-height:var(--tap);padding:.5rem 1.1rem;border-radius:999px;border:1.5px solid rgba(245,233,214,.5);background:transparent;color:var(--sand);font:650 1rem/1 var(--sans);cursor:pointer}
+.filter:hover{border-color:var(--gold-lt)}
+.filter[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--earth)}
+.groups{display:grid;gap:1rem}
+.group{padding:1.2rem 1.3rem 1rem;border-radius:14px;background:var(--earth-2)}
+.group[hidden]{display:none}
+.group h3{font-size:1.9rem;color:var(--gold-lt);margin-bottom:.4rem}
+.prices{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.prices th,.prices td{padding:.55rem 0;vertical-align:baseline}
+.prices th{text-align:left;font-weight:500}
+.prices td{text-align:right;font-weight:650;white-space:nowrap;padding-left:1rem;color:var(--gold-lt)}
+.sub{display:block;font-size:1rem;color:var(--sand-soft);font-weight:400}
+.also{margin-top:1.2rem;color:var(--sand-soft)}
+.link-btn{display:none;align-items:center;min-height:var(--tap);margin-top:.4rem;padding:0;border:0;background:none;color:var(--gold-lt);font:650 1.0625rem/1 var(--sans);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.js .link-btn{display:inline-flex}
+html:not(.js) .plate{pointer-events:none}
+
+@media (min-width:60rem){.menu__grid{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(2rem,4vw,4rem);align-items:start}.menu__media{position:sticky;top:calc(var(--header-h) + 20px)}}
+
+/* Dans les assiettes : grille de photos, ouverture en fiche (FLIP) */
+.plates{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter) clamp(4rem,9vw,8rem)}
+.plates__head{display:grid;gap:1rem;margin-bottom:2rem}
+.plates__head h2{font-size:clamp(2.6rem,7vw,5.2rem)}
+.plates__head p{max-width:58ch;color:var(--sand-soft)}
+.plates__grid{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:36rem){.plates__grid{grid-template-columns:1fr 1fr}}
+@media (min-width:60rem){.plates__grid{grid-template-columns:repeat(4,1fr)}}
+.plate{position:relative;display:block;width:100%;padding:0;border:0;border-radius:14px;overflow:hidden;background:var(--earth-2);color:var(--sand);cursor:zoom-in;text-align:left}
+.plate img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s var(--ease)}
+.plate__label{display:block;padding:.75rem 1rem .85rem;font:500 1.15rem/1.25 var(--serif)}
+@media (hover:hover){.plate:hover img{transform:scale(1.06)}}
+.plate:focus-visible{outline-offset:3px}
+.plate:focus-visible img{transform:scale(1.04)}
+
+/* Venir */
+.visit{background:var(--clay-dk);padding:clamp(4rem,9vw,8rem) var(--gutter);display:grid;gap:2.4rem}
+.visit > *{max-width:var(--wrap)}
+.visit__main{display:grid;gap:1.6rem;justify-items:start}
+.visit__title{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1.2rem;font-size:clamp(2.2rem,6vw,4rem)}
+.visit__number{font:italic 400 clamp(6rem,22vw,12rem)/.82 var(--serif);color:var(--gold-lt)}
+.visit__city{display:block;margin-top:.5rem;font:400 1.2rem/1.4 var(--sans);color:var(--sand)}
+.hours-card{width:100%;max-width:32rem;padding:1.3rem 1.4rem;border-radius:12px;background:var(--earth)}
+.hours-card h3{font-size:2rem}
+.hours{width:100%;margin-top:.8rem;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours th{text-align:left;font-weight:400;color:var(--sand-soft);padding:.3rem 0}
+.hours td{text-align:right;font-weight:650}
+.note{margin-top:.8rem;font-size:1rem;color:var(--sand-soft)}
+.note a{color:var(--gold-lt);display:inline-block;min-height:var(--tap);line-height:var(--tap)}
+.visit__photo{display:grid;gap:.6rem}
+.visit__photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px}
+.visit__photo figcaption{font-size:1rem;color:var(--sand-soft)}
+.visit__photo a,.foot a{color:var(--gold-lt);text-underline-offset:3px}
+@media (min-width:56rem){.visit{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:end;column-gap:clamp(2rem,5vw,5rem)}.visit > *{max-width:none}}
+
+.foot{max-width:var(--wrap);margin:0 auto;padding:3rem var(--gutter) calc(2.5rem + var(--dock-h) + env(safe-area-inset-bottom,0px));display:grid;gap:2rem;color:var(--sand-soft);font-size:1rem}
+.foot__mark{font:italic 400 clamp(3.4rem,15vw,9rem)/.9 var(--serif);color:var(--gold)}
+.foot__cols{display:grid;gap:1.4rem}
+.foot__label{font-weight:650;color:var(--sand);margin-bottom:.35rem}
+.foot ul{display:grid;gap:.4rem}
+@media (min-width:48rem){.foot__cols{grid-template-columns:repeat(3,1fr)}}
+
+/* Dock mobile : itinéraire seul (téléphone non vérifié par une seconde source) */
+.dock{position:fixed;z-index:60;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:0 12px calc(12px + env(safe-area-inset-bottom,0px));pointer-events:none}
+.dock__btn{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;min-height:52px;min-width:12rem;padding:0 1.5rem;border-radius:999px;background:var(--gold);color:var(--earth);font:650 1.0625rem/1 var(--sans);text-decoration:none}
+@media (min-width:56rem){.dock{display:none}.foot{padding-bottom:2.5rem}}
+
+/* Fiche plat */
+.dish{width:min(100% - 2rem,56rem);max-height:calc(100svh - 2rem);padding:0;border:0;border-radius:16px;background:var(--earth-2);color:var(--sand)}
+.dish::backdrop{background:rgba(20,10,6,.9)}
+.dish[open]{animation:dish-in .32s var(--ease)}
+@keyframes dish-in{from{opacity:0}}
+.dish__inner{display:grid}
+.dish__frame{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--earth);touch-action:pan-y pinch-zoom;cursor:grab}
+.dish__frame.is-dragging{cursor:grabbing}
+.dish__img{width:100%;height:100%;object-fit:contain;transition:opacity .2s;user-select:none;-webkit-user-drag:none}
+.dish__img.is-loading{opacity:.4}
+.dish__frame.is-missing::after{content:"Image indisponible";position:absolute;inset:0;display:grid;place-items:center}
+.dish__body{display:grid;gap:.7rem;padding:1.3rem 1.4rem 1.4rem}
+.dish__title{font-size:2rem}
+.dish__meta{font-size:1rem;color:var(--sand-soft)}
+.dish__route{justify-self:start;display:inline-flex;align-items:center;min-height:var(--tap);color:var(--gold-lt)}
+.dish__controls{display:flex;gap:.5rem;flex-wrap:wrap}
+.dish__btn{min-width:var(--tap);min-height:var(--tap);padding:0 1rem;border-radius:999px;border:1.5px solid rgba(245,233,214,.5);background:transparent;color:var(--sand);font:650 1rem/1 var(--sans);cursor:pointer}
+.dish__close{margin-left:auto;background:var(--gold);color:var(--earth);border-color:var(--gold)}
+@media (min-width:48rem){.dish__inner{grid-template-columns:1.2fr 1fr}.dish__frame{aspect-ratio:auto;height:min(36rem,calc(100svh - 4rem))}}
+@media (max-width:47.99rem){.dish__frame{aspect-ratio:auto;height:min(58svh,30rem)}}
+body.has-dialog{overflow:hidden}
+
+/* Révélations */
+[data-split] .w{display:inline-block;vertical-align:top;overflow:hidden;padding:0 .12em .1em;margin:0 -.12em -.1em}
+[data-split] .w__i{display:inline-block}
+.motion:not(.motion-ready):not(.motion-failsafe) [data-split]{opacity:0}
+.motion-ready [data-split].is-pending .w__i{transform:translateY(108%)}
+.motion-ready [data-reveal].is-pending{opacity:0;transform:translateY(18px)}
+.motion-ready [data-reveal]{transition:opacity .6s var(--ease) var(--rd,0ms),transform .7s var(--ease) var(--rd,0ms)}
+.motion-failsafe [data-split],.motion-failsafe [data-reveal]{opacity:1!important;transform:none!important}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  [data-split],[data-reveal]{opacity:1!important;transform:none!important}
+  [data-split] .w__i,.btn__face,.plate img{transform:none!important}
+}
+
+/* Mobile : l'itinéraire est déjà dans la barre fixe ; l'ouverture garde « Voir la carte » visible */
+@media (max-width:55.99rem){.hero__actions .btn--line{display:none}}
+@media (max-width:55.99rem) and (max-height:700px){.hero__title{font-size:clamp(2.4rem,11vw,3.2rem)}.hero__lede{font-size:1rem}.hero__text{gap:.7rem}}
+@media (max-width:59.99rem) and (max-height:700px){.hero__media{aspect-ratio:2/1}.hero__text{padding-top:1.2rem;padding-bottom:1.4rem}}
+
+/* Image en échec : cadre étiqueté, dimensions conservées */
+.plate.is-missing,.shot.is-missing,.essay__inline.is-missing,.grill__band.is-missing,.menu__photo.is-missing{position:relative}
+.plate.is-missing img,.shot.is-missing img,.essay__inline.is-missing img,.grill__band.is-missing img,.menu__photo.is-missing img{visibility:hidden}
+.plate.is-missing::after,.shot.is-missing::after,.essay__inline.is-missing::after,.grill__band.is-missing::after,.menu__photo.is-missing::after{content:"Image indisponible";position:absolute;inset:0;display:grid;place-items:center;font:600 1rem/1.3 system-ui,sans-serif;color:inherit;background:rgba(0,0,0,.25)}
+figure.is-missing,.thumb.is-missing,.essay__stage.is-missing{position:relative}
+figure.is-missing img,.thumb.is-missing img,.essay__stage.is-missing img{visibility:hidden}
+figure.is-missing::after,.thumb.is-missing::after,.essay__stage.is-missing::after{content:"Image indisponible";position:absolute;inset:0;display:grid;place-items:center;font:600 1rem/1.3 system-ui,sans-serif;color:inherit;background:rgba(0,0,0,.25)}
+
+/* Liens secondaires (pied de page, légendes) : zone cliquable ≥ 24 px partout (WCAG 2.2, 2.5.8), ≥ 44 px au doigt / sur mobile */
+.foot a,figcaption a{display:inline-flex;align-items:center;min-height:28px}
+@media (pointer:coarse),(max-width:56rem){.foot a,figcaption a{min-height:44px;padding:0 .1rem}}
+
+/* pt-BR : en-tête sur une ligne au mobile (libellés plus longs) */
+@media (max-width:420px){.wordmark{white-space:nowrap}.nav a{white-space:nowrap}.nav a[href="#assiettes"]{display:none}}
+
+/* Fiche plat : colonne naturelle (plus de rangées étirées), contrôles en bas, boutons de taille fixe */
+.dish{border-radius:20px;overflow:hidden}
+.dish__body{position:relative;display:flex;flex-direction:column;gap:.85rem;padding:2.2rem 2.2rem 1.8rem}
+.dish__title{padding-right:3rem}
+.dish__controls{margin-top:auto;padding-top:1.25rem;display:flex;align-items:center;gap:.65rem}
+.dish__btn{height:var(--tap);min-height:var(--tap);display:inline-flex;align-items:center;justify-content:center;flex:none}
+.dish__btn[data-prev],.dish__btn[data-next]{width:var(--tap);min-width:var(--tap);padding:0;border-radius:50%}
+.dish__close{margin-left:auto;padding:0 1.5rem;border-radius:999px;font-weight:700}
+.dish__x{position:absolute;top:1rem;right:1.2rem;width:var(--tap);height:var(--tap);display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:var(--earth);color:var(--sand);font:400 1.15rem/1 var(--sans);cursor:pointer}
+.dish__x:hover{background:var(--earth-2);color:var(--gold-lt)}
+@media (max-width:47.99rem){.dish__body{padding:1.4rem 1.3rem 1.3rem}}
+
+/* Le cardápio, grille commune (12/11/2026) : en-tête et corps sur les mêmes colonnes et la même gouttière.
+   Titre au-dessus de la photo, avis = largeur exacte de la colonne de droite (filtres + listes) ;
+   filtres en grille régulière (4 colonnes, 2 × 2 sur petit écran) ; photo collante au bureau. */
+.menu{--menu-gap:clamp(2rem,4vw,3.5rem)}
+.filters{display:none}
+.filter-ready .filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;margin-bottom:1.2rem}
+.filter{padding:.5rem .6rem;text-align:center;line-height:1.15}
+.menu__media .caption{margin-top:.7rem}
+.menu__media .link-btn{margin-top:.2rem}
+@media (max-width:30rem){.filter-ready .filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:60rem){
+  .menu__head,.menu__grid{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);column-gap:var(--menu-gap)}
+  .menu__head{align-items:end;margin-bottom:2.4rem}
+  .menu__head .notice{max-width:none;margin:0}
+  .menu__grid{gap:var(--menu-gap)}
+}
+.filter-ready .filters{display:flex;flex-wrap:wrap}
+.filter{flex:1 1 auto;white-space:nowrap}
+@media (max-width:30rem){.filter-ready .filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.filter{white-space:normal}}
+.menu__head .notice{max-width:none}
+@media (max-width:359px){.wordmark{font-size:1.3rem}.nav a{padding:0 .35rem}}

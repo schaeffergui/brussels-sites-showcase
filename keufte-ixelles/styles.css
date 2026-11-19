@@ -1,0 +1,259 @@
+/* Keufté Ixelles · Flagey — charbon, une seule braise rouge-orangé, typographie condensée */
+@font-face{font-family:"Anton";src:url("fonts/anton-latin.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+:root{
+  --coal:#18181B; --coal-2:#232327; --coal-3:#2E2E33;
+  --ember:#E8552D;      /* accent unique (aplats, boutons : texte charbon dessus) */
+  --ember-lt:#FF8A5C;   /* braise lisible sur charbon, focus */
+  --ink:#F4F4F5; --ink-soft:#D4D4D8;
+  --display:"Anton",Impact,"Arial Narrow",sans-serif;
+  --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --gutter:clamp(1.15rem,4.5vw,4rem); --wrap:1240px; --header-h:60px; --tap:48px; --dock-h:64px;
+  --ease:cubic-bezier(.22,.8,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 14px);scroll-padding-bottom:calc(var(--dock-h) + 24px + env(safe-area-inset-bottom,0px));background:var(--coal)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--coal);color:var(--ink);font:400 1.0625rem/1.6 var(--sans);overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;line-height:.95;letter-spacing:.005em;text-transform:uppercase}
+p,ul{margin:0} ul{padding:0;list-style:none} a{color:inherit}
+.visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:where(a,button,summary,[tabindex]):focus-visible{outline:3px solid var(--ember-lt);outline-offset:3px;border-radius:4px}
+.skip-link{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--ember-lt);color:var(--coal);padding:.8rem 1rem;font-weight:700}
+.skip-link:focus{left:8px}
+
+.btn{display:inline-flex;min-height:var(--tap);text-decoration:none;border-radius:4px}
+.btn__face{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:var(--tap);padding:.8rem 1.4rem;border-radius:inherit;border:2px solid transparent;font:700 1.0625rem/1 var(--sans);letter-spacing:.02em;transition:background-color .15s,color .15s,border-color .15s}
+.btn--ember .btn__face{background:var(--ember-lt);color:var(--coal)}
+.btn--ember:hover .btn__face{background:#FFA27C}
+.btn--line .btn__face{border-color:var(--ink);color:var(--ink)}
+.btn--line:hover .btn__face{border-color:var(--ember-lt);color:var(--ember-lt)}
+.btn--xl .btn__face{min-height:60px;font-size:1.2rem}
+.btn:focus-visible{outline-offset:4px}
+
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;min-height:var(--header-h);padding:env(safe-area-inset-top,0px) var(--gutter) 0;background:var(--coal)}
+.wordmark{display:inline-flex;align-items:center;min-height:var(--tap);font:400 1.8rem/1 var(--display);letter-spacing:.04em;color:var(--ember-lt);text-decoration:none}
+.nav{display:flex}.nav a{display:inline-flex;align-items:center;min-height:var(--tap);padding:0 .8rem;text-decoration:none;font-weight:600}
+.nav a:hover{color:var(--ember-lt)}
+@media (max-width:420px){.wordmark{font-size:1.5rem}.nav a{padding:0 .45rem}}
+
+.hero{position:relative;isolation:isolate;display:grid;align-items:end;min-height:clamp(520px,calc(100svh - var(--header-h)),900px);overflow:hidden}
+.hero__media{position:absolute;inset:0;z-index:-1;background:var(--coal-2)}
+.hero__media picture{display:block;width:100%;height:100%}
+.hero__media img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hero__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,24,27,.35) 0%,rgba(24,24,27,.55) 45%,rgba(24,24,27,.97) 85%)} /* voile de lisibilité sur photo (exception justifiée dans le README) */
+.hero__media.is-missing::before{content:"Image indisponible";position:absolute;inset:0;display:grid;place-items:center;color:var(--ink-soft)}
+.hero__credit{position:absolute;z-index:2;right:.75rem;top:.75rem;max-width:min(26rem,calc(100% - 1.5rem));padding:.3rem .7rem;border-radius:4px;background:rgba(24,24,27,.85);color:var(--ink-soft);font-size:.875rem}
+.hero__text{width:100%;max-width:var(--wrap);margin:0 auto;padding:2rem var(--gutter) max(2.4rem,calc(1.2rem + env(safe-area-inset-bottom,0px)));display:grid;gap:1rem}
+.status{justify-self:start;display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .8rem;border-radius:999px;background:var(--coal-3);color:var(--ink);font-weight:650;font-size:1rem}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ink-soft)}
+.status[data-state="open"]::before{background:#6EE7A0}.status[data-state="closed"]::before{background:var(--ember-lt)}
+.hero__title{font-size:clamp(3.4rem,14vw,10rem);line-height:.88;max-width:10ch}
+.hero__lede{font-size:1.2rem;max-width:36ch}
+.hero__actions{display:flex;flex-wrap:wrap;gap:.6rem}
+/* Mobile : la barre d'itinéraire fixe ne recouvre jamais les actions d'ouverture */
+@media (max-width:55.99rem){.hero__text{padding-bottom:calc(var(--dock-h) + 28px + env(safe-area-inset-bottom,0px))}}
+
+.grill{display:grid;gap:1.2rem;padding:clamp(2.5rem,6vw,4rem) var(--gutter);background:var(--coal-2)}
+.grill__band{position:relative;aspect-ratio:4/3;border-radius:6px;background:var(--coal-3);overflow:hidden}
+.grill__band img{width:100%;height:100%;object-fit:cover}
+.grill__credit{position:absolute;left:.6rem;bottom:.6rem;padding:.25rem .6rem;border-radius:4px;background:rgba(24,24,27,.88);color:var(--ink-soft);font-size:.875rem}
+.grill__band canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.grill__text{display:grid;gap:.6rem;max-width:44rem}
+.grill__text h2{font-size:clamp(2rem,6vw,3.6rem)}
+.grill__text p{color:var(--ink-soft)}
+@media (min-width:56rem){.grill{grid-template-columns:1fr 1fr;align-items:center;column-gap:3rem}.grill__band{aspect-ratio:5/4}}
+
+.menu{max-width:var(--wrap);margin:0 auto;padding:clamp(4rem,9vw,8rem) var(--gutter)}
+.menu__head{display:grid;gap:1rem;margin-bottom:2rem}
+.menu__head h2{font-size:clamp(3rem,9vw,6rem)}
+.notice{max-width:62ch;padding:1rem 1.2rem;background:var(--coal-2);border-left:4px solid var(--ember);border-radius:0 6px 6px 0}
+.menu__grid{display:grid;gap:1.8rem}
+.menu__grid > *{min-width:0}
+.menu__media{position:relative;display:grid;gap:.6rem}
+.menu__photo{position:relative;display:block;border-radius:6px;overflow:hidden;background:#fff}
+.menu__media img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .35s var(--ease)}
+@media (hover:hover){.menu__photo:hover img{transform:scale(1.04)}}
+.menu__zoom{position:absolute;right:.6rem;bottom:.6rem;padding:.45rem .8rem;border-radius:4px;background:var(--coal);color:var(--ink);font-weight:700;font-size:1rem}
+.menu__media.is-missing img{visibility:hidden}
+.caption{font-size:1rem;color:var(--ink-soft)}
+.tabs{display:none}
+.tabs-ready .tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+.tab{min-height:var(--tap);padding:.5rem 1rem;border:2px solid var(--coal-3);border-radius:4px;background:var(--coal-2);color:var(--ink);font:700 1rem/1 var(--sans);cursor:pointer;transition:background-color .12s,border-color .12s}
+.tab:hover{border-color:var(--ember-lt)}
+.tab[aria-selected="true"]{background:var(--ember-lt);border-color:var(--ember-lt);color:var(--coal)}
+.panels{display:grid}
+.panel{grid-area:1/1;display:grid;gap:.8rem;align-content:start;padding:1.2rem 1.3rem;background:var(--coal-2);border-radius:6px}
+.tabs-ready .panel[hidden]{display:grid;visibility:hidden}
+.panel:not([hidden])+.panel{margin-top:0}
+html:not(.js) .panel,.panel{position:relative}
+.panel__title{font-size:2rem;color:var(--ember-lt)}
+.items{display:grid;gap:.1rem}
+.items{gap:.35rem}
+.items li{display:flex;justify-content:space-between;align-items:baseline;gap:.2rem 1rem;padding:.7rem .9rem;background:var(--coal-3);border-radius:4px;font-size:1.15rem;font-weight:600}
+.it small{display:block;font-size:1rem;font-weight:400;color:var(--ink-soft)}
+.pr{flex:none;font-variant-numeric:tabular-nums;font-weight:700;color:#FFB08F;text-align:right;max-width:50%}
+.pr .roll{display:inline-block}
+.seg{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:0;padding:0;border:0}
+.seg[hidden]{display:none}
+.seg__legend{float:left;margin-right:.6rem;font-weight:700;color:var(--ink-soft)}
+.seg label{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 1rem;border-radius:999px;background:var(--coal-3);font-weight:700;cursor:pointer;transition:background-color .15s,color .15s}
+.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg label:has(input:checked){background:var(--ink);color:var(--coal)}
+.seg label:has(input:focus-visible){outline:3px solid var(--ember-lt);outline-offset:3px}
+.src{font-size:1rem;color:var(--ink-soft)}
+@media (min-width:60rem){.menu__grid{grid-template-columns:1fr 1.1fr;gap:3rem;align-items:start}}
+/* Sans JS : les panneaux s'empilent normalement */
+html:not(.js) .panels{gap:1rem}html:not(.js) .panel{grid-area:auto}
+
+/* Bande photo horizontale : défilement natif + aimantation, boutons, glisser à la souris */
+.strip{padding:clamp(3rem,8vw,6rem) 0;background:var(--coal-2)}
+.strip__head,.strip__note{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.strip__head{display:flex;align-items:end;justify-content:space-between;gap:1rem}
+.strip__head h2{font-size:clamp(2.6rem,8vw,5.4rem)}
+.strip__note{margin-top:.8rem;color:var(--ink-soft)}
+.strip__nav{display:flex;gap:.4rem}.strip__nav[hidden]{display:none}
+.strip__btn{min-width:var(--tap);min-height:var(--tap);border:0;border-radius:4px;background:var(--coal-3);color:var(--ink);font:700 1.2rem/1 var(--sans);cursor:pointer}
+.strip__btn:hover{background:var(--ember-lt);color:var(--coal)}
+.strip__btn:disabled{opacity:.4;cursor:default}
+.strip__track{display:grid;grid-auto-flow:column;grid-auto-columns:min(72vw,22rem);gap:1rem;margin-top:1.6rem;padding:0 var(--gutter) .6rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--gutter);overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--coal-3) transparent}
+.strip__track.is-grabbing{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.shot{scroll-snap-align:start;display:grid;gap:.5rem}
+.shot img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:6px;-webkit-user-drag:none}
+.shot p{font-size:1rem;color:var(--ink-soft)}
+.motion-ready .shot.is-pending img{clip-path:inset(0 0 100% 0)}
+.motion-ready .shot img{transition:clip-path .45s cubic-bezier(.7,0,.2,1) var(--sd,0ms)}
+
+.visit{max-width:var(--wrap);margin:0 auto;padding:clamp(3rem,8vw,7rem) var(--gutter);display:grid;gap:1.2rem;justify-items:start}
+.visit__title{font-size:clamp(2.8rem,10vw,7rem);color:var(--ink)}
+.visit__addr{font-size:1.2rem;max-width:44ch}
+.visit__addr strong{color:var(--ember-lt)}
+.hours{width:100%;max-width:32rem;background:var(--coal-2);border-radius:6px}
+.hours summary{display:flex;align-items:center;min-height:56px;padding:0 1.2rem;font-weight:700;cursor:pointer}
+.hours__hint{margin-left:.4rem;font-weight:400;color:var(--ink-soft)}
+.hours table{width:calc(100% - 2.4rem);margin:0 1.2rem;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours th{text-align:left;font-weight:400;color:var(--ink-soft);padding:.35rem 0}
+.hours td{text-align:right;font-weight:650}
+.hours .note{padding:0 1.2rem 1.2rem}
+.note{margin-top:.6rem;font-size:1rem;color:var(--ink-soft)}
+.note a{color:var(--ember-lt);display:inline-block;min-height:var(--tap);line-height:var(--tap)}
+
+.foot{max-width:var(--wrap);margin:0 auto;padding:3rem var(--gutter) calc(2.5rem + var(--dock-h) + env(safe-area-inset-bottom,0px));display:grid;gap:2rem;color:var(--ink-soft);font-size:1rem}
+.foot__mark{font:400 clamp(4rem,20vw,12rem)/.85 var(--display);color:var(--ember-lt)}
+.foot__cols{display:grid;gap:1.4rem}.foot__label{font-weight:700;color:var(--ink);margin-bottom:.35rem}.foot ul{display:grid;gap:.4rem}
+.foot a{color:var(--ember-lt);text-underline-offset:3px}
+@media (min-width:48rem){.foot__cols{grid-template-columns:repeat(3,1fr)}}
+
+.dock{position:fixed;z-index:60;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:0 12px calc(12px + env(safe-area-inset-bottom,0px));pointer-events:none}
+.dock__btn{pointer-events:auto;display:inline-flex;align-items:center;justify-content:center;min-height:52px;min-width:12rem;border-radius:4px;background:var(--ember-lt);color:var(--coal);font:700 1.0625rem/1 var(--sans);text-decoration:none}
+@media (min-width:56rem){.dock{display:none}.foot{padding-bottom:2.5rem}}
+
+/* Marge haute : les accents des capitales (É) ne sont pas rognés par le masque */
+[data-split] .w{display:inline-block;vertical-align:top;overflow:hidden;padding:.16em .06em .06em;margin:-.16em -.06em -.06em}
+[data-split] .w__i{display:inline-block}
+.motion:not(.motion-ready):not(.motion-failsafe) [data-split]{opacity:0}
+.motion-ready [data-split].is-pending .w__i{transform:translateY(108%)}
+.motion-ready [data-reveal].is-pending{opacity:0;transform:translateY(16px)}
+.motion-ready [data-reveal]{transition:opacity .45s var(--ease) var(--rd,0ms),transform .5s var(--ease) var(--rd,0ms)}
+.motion-failsafe [data-split],.motion-failsafe [data-reveal]{opacity:1!important;transform:none!important}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  [data-split],[data-reveal]{opacity:1!important;transform:none!important}
+  [data-split] .w__i,.btn__face,.pr .roll{transform:none!important}
+  .shot img{clip-path:none!important}
+  .grill__band canvas{display:none}
+}
+
+/* Mobile : l'itinéraire est déjà dans la barre fixe ; l'ouverture garde « Voir la carte » visible */
+@media (max-width:55.99rem){.hero__actions .btn--line{display:none}}
+@media (max-width:55.99rem) and (max-height:700px){.hero__title{font-size:clamp(2.4rem,11vw,3.2rem)}.hero__lede{font-size:1rem}.hero__text{gap:.7rem}}
+
+/* Image en échec : cadre étiqueté, dimensions conservées */
+.plate.is-missing,.shot.is-missing,.essay__inline.is-missing,.grill__band.is-missing,.menu__photo.is-missing{position:relative}
+.plate.is-missing img,.shot.is-missing img,.essay__inline.is-missing img,.grill__band.is-missing img,.menu__photo.is-missing img{visibility:hidden}
+.plate.is-missing::after,.shot.is-missing::after,.essay__inline.is-missing::after,.grill__band.is-missing::after,.menu__photo.is-missing::after{content:"Image indisponible";position:absolute;inset:0;display:grid;place-items:center;font:600 1rem/1.3 system-ui,sans-serif;color:inherit;background:rgba(0,0,0,.25)}
+figure.is-missing,.thumb.is-missing,.essay__stage.is-missing{position:relative}
+figure.is-missing img,.thumb.is-missing img,.essay__stage.is-missing img{visibility:hidden}
+figure.is-missing::after,.thumb.is-missing::after,.essay__stage.is-missing::after{content:"Image indisponible";position:absolute;inset:0;display:grid;place-items:center;font:600 1rem/1.3 system-ui,sans-serif;color:inherit;background:rgba(0,0,0,.25)}
+
+/* Liens secondaires (pied de page, légendes) : zone cliquable ≥ 24 px partout (WCAG 2.2, 2.5.8), ≥ 44 px au doigt / sur mobile */
+.foot a,figcaption a{display:inline-flex;align-items:center;min-height:28px}
+@media (pointer:coarse),(max-width:56rem){.foot a,figcaption a{min-height:44px;padding:0 .1rem}}
+
+/* Carrousel : bouton Pause / Reprendre (texte visible) */
+.js .strip__track{scrollbar-width:none}
+.js .strip__track::-webkit-scrollbar{display:none}
+@media (max-width:30rem){.strip__head{flex-wrap:wrap}}
+
+/* Carrousel continu (JS) : la piste devient une bande translatée, l'aimantation native est coupée */
+.strip__meta{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4rem 1.2rem}
+.strip__meta .strip__note{margin:.8rem 0 0;padding:0}
+.strip__auto{display:inline-flex;align-items:center;gap:.6rem;min-height:var(--tap);margin-top:.6rem;font-weight:600;color:var(--ink);cursor:pointer}
+.strip__auto[hidden]{display:none}
+.strip__auto input{appearance:none;position:relative;width:2.6rem;height:1.5rem;margin:0;border-radius:999px;background:var(--coal-3);cursor:pointer;transition:background-color .2s}
+.strip__auto input::after{content:"";position:absolute;top:.2rem;left:.2rem;width:1.1rem;height:1.1rem;border-radius:50%;background:var(--ink);transition:transform .2s}
+.strip__auto input:checked{background:var(--ember-lt)}
+.strip__auto input:checked::after{transform:translateX(1.1rem);background:var(--coal)}
+.strip__auto input:focus-visible{outline:3px solid var(--ember-lt);outline-offset:3px}
+.strip__viewport{margin-top:1.6rem;overflow:hidden;touch-action:pan-y pinch-zoom;cursor:grab}
+.strip__viewport.is-dragging{cursor:grabbing}
+.strip__viewport.is-dragging .shot__open{pointer-events:none}
+.strip__viewport .strip__track{margin-top:0;overflow:visible;scroll-snap-type:none;width:max-content;will-change:transform;padding:0 0 .6rem}
+.shot__open{display:block;border-radius:6px;color:inherit;-webkit-user-drag:none}
+.shot__open:focus-visible{outline:3px solid var(--ember-lt);outline-offset:3px}
+@media (hover:hover){.shot__open img{transition:transform .35s var(--ease),clip-path .45s cubic-bezier(.7,0,.2,1) var(--sd,0ms)}.shot__open:hover img{transform:scale(1.03)}}
+.shot img{user-select:none}
+
+/* Visionneuse */
+.viewer{width:min(100% - 1.5rem,46rem);max-height:calc(100svh - 1.5rem);padding:1rem;border:0;border-radius:8px;background:var(--coal-2);color:var(--ink)}
+.viewer::backdrop{background:rgba(10,10,12,.9)}
+.viewer__figure{margin:0;display:grid;gap:.6rem}
+.viewer__frame{display:grid;place-items:center;background:var(--coal)}
+.viewer__img{max-width:100%;max-height:calc(100svh - 11rem);width:auto;height:auto;border-radius:4px}
+.viewer__frame.is-missing{min-height:12rem}
+.viewer__frame.is-missing::after{content:"Image indisponible";color:var(--ink-soft)}
+.viewer__frame.is-missing .viewer__img{display:none}
+.viewer__cap{font-size:1rem;color:var(--ink-soft)}
+.viewer__bar{display:flex;gap:.4rem;margin-top:.8rem}
+.viewer__close{margin-left:auto;padding:0 1.1rem;font-size:1rem;background:var(--ember-lt);color:var(--coal)}
+body.has-viewer{overflow:hidden}
+
+/* La carte : grille commune (12/11/2026)
+   - la figure perd les marges par défaut du navigateur (17px 40px) : même bord gauche que le titre ;
+   - catégories en grille 2 × 2 (libellés complets, plus de « Desserts & boissons » isolé) ;
+   - dans le panneau, titre, choix de taille, noms et descriptions sur un même axe ; prix en colonne droite ;
+   - au bureau, la photo de la carte reste visible (sticky) à côté du panneau long. */
+.menu__media{margin:0}
+.tabs-ready .tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin-bottom:1rem}
+.tab{text-align:center;line-height:1.2}
+.panel{padding:1.1rem 1.1rem 1.3rem}
+.panel__title,.seg,.src{padding-inline:.9rem}
+.pr{min-width:6.5ch}
+@media (min-width:60rem){
+  .menu__grid{column-gap:3rem;align-items:start}
+  .menu__media{position:sticky;top:calc(var(--header-h) + 1.5rem)}
+}
+@media (max-width:40rem){.panel{padding:.9rem .5rem 1.1rem}.items li{padding:.7rem .75rem}.panel__title,.seg,.src{padding-inline:.75rem}}
+@media (max-width:22.5rem){.seg{gap:.3rem}.seg__legend{margin-right:.3rem}.seg label{padding:0 .75rem}}
+
+/* pt-BR : en-tête sur une ligne au mobile (libellés plus longs) */
+@media (max-width:420px){.wordmark{white-space:nowrap}.nav a{white-space:nowrap}.nav a[href="#photos"]{display:none}}
+
+/* La carte, grille éditoriale v2 (12/11/2026)
+   - en-tête sur la même grille que le contenu : titre au-dessus de la photo, avis dans la colonne de droite
+     (plus d'avis qui déborde dans la gouttière, plus de vide en haut à droite) ;
+   - lignes de carte sans boîtes : la seule bordure visible est celle du panneau, et titre, noms,
+     descriptions et notes partagent le même axe de texte (marge intérieure unique du panneau). */
+.panel{padding:1.4rem 1.5rem 1.5rem;gap:.6rem}
+.panel__title,.seg,.src{padding-inline:0}
+.items{gap:0}
+.items li{padding:.8rem 0;background:none;border-radius:0}
+.items li + li{padding-top:.8rem}
+.src{margin-top:.4rem}
+@media (min-width:60rem){
+  .menu__head{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);column-gap:3rem;align-items:end;margin-bottom:2.4rem}
+  .menu__head .notice{max-width:none;margin:0}
+}
+@media (max-width:40rem){.panel{padding:1.1rem 1.1rem 1.2rem}.panel__title,.seg,.src{padding-inline:0}.items li{padding:.75rem 0}}
+/* Chaque panneau prend sa propre hauteur (plus de grande boîte vide pour les catégories courtes) */
+.tabs-ready .panel[hidden]{display:none}

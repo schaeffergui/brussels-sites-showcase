@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le Petit Lion · Marolles — bar de bairro, sinuca e pebolim, rue Haute 232</title>
+<meta name="description" content="Le Petit Lion, estaminet (bar tradicional) de bairro na rue Haute 232, no bairro das Marolles, em Bruxelas: uma bebida, uma partida de sinuca ou de pebolim.">
+<meta name="theme-color" content="#1E140D">
+<link rel="preload" href="fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=33">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231E140D'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23E8A33D'/%3E%3C/svg%3E">
+<script>
+  /* Avant le premier rendu : masques de titres seulement si le mouvement est permis.
+     Filet de sécurité : si les modules ne démarrent pas, tout s'affiche après 1 s. */
+  (function (r) {
+    r.classList.add('js');
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('motion');
+    setTimeout(function () { if (!r.classList.contains('motion-ready')) r.classList.add('motion-failsafe'); }, 1000);
+  })(document.documentElement);
+</script>
+<script type="module" src="js/main.js?v=16"></script>
+</head>
+<body>
+<a class="skip-link" href="#jeux">Ir para os jogos</a>
+
+<header class="topbar">
+  <a class="wordmark" href="#top" aria-label="Le Petit Lion, voltar ao topo">le petit lion</a>
+  <nav class="nav" aria-label="Navegação principal">
+    <a href="#jeux">Jogos</a>
+    <a href="#photos">Fotos</a>
+    <a href="#venir">Como chegar</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ░░ OUVERTURE ░░ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <figure class="hero__photo slot" data-slot>
+      <picture>
+      <source media="(max-width: 47.99rem) and (orientation: portrait)" srcset="img/photos/hero-portrait-720.webp 720w, img/photos/hero-portrait-1080.webp 1080w" sizes="100vw" width="720" height="1040">
+      <img src="img/photos/hero-1280.webp"
+           srcset="img/photos/hero-960.webp 960w, img/photos/hero-1280.webp 1280w, img/photos/hero-1920.webp 1920w"
+           sizes="100vw" width="1280" height="720" fetchpriority="high" decoding="async"
+           alt="Placeholder gráfico para demonstração pública; não é uma fotografia do estabelecimento.">
+      </picture>
+      <figcaption class="slot__note"><span class="credit-wide">Imagem placeholder demonstrativo</span><span class="credit-tall">Imagem placeholder demonstrativo</span></figcaption>
+    </figure>
+    <div class="hero__veil" aria-hidden="true"></div>
+    <div class="hero__content">
+      <h1 id="hero-title" class="hero__title" data-split>Uma bebida,<br> uma partida.</h1>
+      <p class="hero__lede" data-reveal>Na rue Haute 232, nas Marolles: um bar de bairro, uma mesa de sinuca e um pebolim.</p>
+      <div class="hero__actions" data-reveal style="--rd:120ms">
+        <a class="btn btn--amber" href="#jeux" data-magnetic><span class="btn__face">Explorar o bar</span></a>
+        <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Le%20Petit%20Lion%2C%20Rue%20Haute%20232%2C%201000%20Bruxelles" target="_blank" rel="noopener" data-magnetic><span class="btn__face">Rota</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ JEUX : três cenas (abas + foto + detalhe no mesmo bloco) e, à parte, a minissinuca jogável ░░ -->
+  <section class="games" id="jeux" aria-labelledby="games-title" data-glow>
+   <div class="glow" aria-hidden="true"></div>
+   <div class="games__layout">
+    <div class="scenes" data-scenes>
+      <div class="games__head">
+        <h2 id="games-title" data-split>O bar, a sinuca, o pebolim.</h2>
+        <p class="games__intro" data-reveal>Três cantos, um mesmo salão e um fliperama. Escolha onde ficar.</p>
+      </div>
+      <div class="scenes__tabs" data-reveal style="--rd:80ms">
+        <div class="tabs" role="tablist" aria-label="Escolher um canto do bar">
+          <button class="tab" type="button" role="tab" id="tab-bar" aria-selected="true" aria-controls="scene-bar" tabindex="0" data-scene="bar">O bar</button>
+          <button class="tab" type="button" role="tab" id="tab-billard" aria-selected="false" aria-controls="scene-billard" tabindex="-1" data-scene="billard">Sinuca</button>
+          <button class="tab" type="button" role="tab" id="tab-babyfoot" aria-selected="false" aria-controls="scene-babyfoot" tabindex="-1" data-scene="babyfoot">Pebolim</button>
+        </div>
+      </div>
+      <div class="scenes__media" data-reveal style="--rd:80ms">
+        <div class="stage" aria-hidden="true" data-tilt>
+          <img class="stage__img is-on" data-scene-img="bar" src="img/photos/scene-bar-1024.webp" srcset="img/photos/scene-bar-480.webp 480w, img/photos/scene-bar-1024.webp 1024w, img/photos/scene-bar-1500.webp 1500w" sizes="(min-width: 60rem) 52vw, 100vw" width="1024" height="768" alt="" loading="lazy" decoding="async">
+          <img class="stage__img" data-scene-img="billard" src="img/photos/scene-billard-1024.webp" srcset="img/photos/scene-billard-480.webp 480w, img/photos/scene-billard-1024.webp 1024w, img/photos/scene-billard-1240.webp 1240w" sizes="(min-width: 60rem) 52vw, 100vw" width="1024" height="768" alt="" loading="lazy" decoding="async">
+          <img class="stage__img" data-scene-img="babyfoot" src="img/photos/scene-babyfoot-1024.webp" srcset="img/photos/scene-babyfoot-480.webp 480w, img/photos/scene-babyfoot-1024.webp 1024w, img/photos/scene-babyfoot-1160.webp 1160w" sizes="(min-width: 60rem) 52vw, 100vw" width="1024" height="768" alt="" loading="lazy" decoding="async">
+          <span class="stage__shine"></span>
+        </div>
+        <p class="slot__caption" data-scene-credit>O balcão. Imagem placeholder demonstrativo.</p>
+      </div>
+      <div class="scenes__detail" data-reveal style="--rd:160ms">
+        <div class="details">
+          <div class="detail" role="tabpanel" id="scene-bar" aria-labelledby="tab-bar" tabindex="0">
+            <h3>O bar</h3>
+            <p class="detail__fact">“Entre os últimos estaminets típicos de Bruxelas.”</p>
+            <p class="detail__src">ULB Journalisme, 2022</p>
+          </div>
+          <div class="detail" role="tabpanel" id="scene-billard" aria-labelledby="tab-billard" tabindex="0">
+            <h3>Sinuca</h3>
+            <p class="detail__fact">Mesa de sinuca no salão, para uma partida com uma bebida.</p>
+            <p class="detail__src">Preços e disponibilidade: pergunte no balcão.</p>
+          </div>
+          <div class="detail" role="tabpanel" id="scene-babyfoot" aria-labelledby="tab-babyfoot" tabindex="0">
+            <h3>Pebolim</h3>
+            <p class="detail__fact">Pebolim no salão, para uma partida entre amigos.</p>
+            <p class="detail__src">Preços e disponibilidade: pergunte no balcão.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pool" id="sinuca" data-pool role="group" aria-labelledby="pool-title">
+      <div class="pool__intro">
+        <h3 class="pool__title" id="pool-title">Minissinuca</h3>
+        <p class="pool__goal" id="pool-goal">Encaçape as três bolas coloridas com o menor número de tacadas.</p>
+        <p class="pool__help" data-pool-help hidden>Com o mouse ou o dedo: arraste a partir da mesa, para trás, como um estilingue, e solte para tacar. Um toque só ajusta a mira. Ou use os controles abaixo.</p>
+      </div>
+        <div class="pool__table" data-billiard>
+          <canvas class="pool__canvas" aria-hidden="true"></canvas>
+          <!-- Sem JS: mesa e bolas imóveis -->
+          <span class="pool__static" aria-hidden="true"><i class="b b--cue"></i><i class="b b--one"></i><i class="b b--three"></i><i class="b b--eight"></i></span>
+        </div>
+      <div class="pool__side">
+        <div class="pool__controls" data-pool-controls hidden>
+          <div class="pool__field">
+            <label for="pool-aim">Mira <output data-aim-out for="pool-aim">0° (para a direita)</output></label>
+            <input type="range" id="pool-aim" min="0" max="355" step="5" value="0" data-aim>
+          </div>
+          <div class="pool__field">
+            <label for="pool-power">Força <output data-power-out for="pool-power">60%</output></label>
+            <input type="range" id="pool-power" min="10" max="100" step="5" value="60" data-power>
+          </div>
+          <div class="pool__actions">
+            <button type="button" class="pool__btn pool__btn--shot" data-shot>Tacar</button>
+            <button type="button" class="pool__btn pool__btn--reset" data-reset>Reiniciar mesa</button>
+          </div>
+          <p class="pool__score" data-score>Tacadas: 0 · Na mesa: 3 bolas</p>
+        </div>
+        <p class="pool__status" aria-live="polite" data-shot-status></p>
+      </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- ░░ GALERIE ░░ -->
+  <section class="gallery" id="photos" aria-labelledby="gallery-title">
+    <div class="gallery__head">
+      <h2 id="gallery-title" data-split>Em imagens</h2>
+      <p class="gallery__note" data-reveal>Fotografias de prévia local substituídas por placeholders gráficos nesta versão pública. o autor aparece ao abrir cada imagem.</p>
+    </div>
+    <ul class="thumbs" data-gallery>
+      <li data-reveal><a class="thumb thumb--comptoir" href="img/photos/gal-comptoir-1024.webp" data-full="img/photos/gal-comptoir-1024.webp" data-mid="img/photos/gal-comptoir-1024.webp" data-credit="Imagem de prévia substituída por placeholder gráfico; não representa fotografia do estabelecimento." aria-haspopup="dialog">
+        <img src="img/photos/gal-comptoir-thumb-480.webp" width="480" height="640" loading="lazy" decoding="async" alt="Placeholder gráfico para demonstração pública; não é uma fotografia do estabelecimento.">
+        <span class="thumb__zoom" aria-hidden="true"></span>
+      </a></li>
+      <li data-reveal style="--rd:70ms"><a class="thumb thumb--facade" href="img/photos/gal-facade-1024.webp" data-full="img/photos/gal-facade-1024.webp" data-mid="img/photos/gal-facade-1024.webp" data-credit="Imagem de prévia substituída por placeholder gráfico; não representa fotografia do estabelecimento." aria-haspopup="dialog">
+        <img src="img/photos/gal-facade-thumb-480.webp" width="480" height="640" loading="lazy" decoding="async" alt="Placeholder gráfico para demonstração pública; não é uma fotografia do estabelecimento.">
+        <span class="thumb__zoom" aria-hidden="true"></span>
+      </a></li>
+      <li data-reveal style="--rd:140ms"><a class="thumb thumb--ardoise" href="img/photos/gal-ardoise-1600.webp" data-full="img/photos/gal-ardoise-1600.webp" data-mid="img/photos/gal-ardoise-1024.webp" data-credit="Imagem de prévia substituída por placeholder gráfico; não representa fotografia do estabelecimento." aria-haspopup="dialog">
+        <img src="img/photos/gal-ardoise-thumb-480.webp" width="480" height="360" loading="lazy" decoding="async" alt="A lousa das cervejas na parede de tijolos, acima dos bancos.">
+        <span class="thumb__zoom" aria-hidden="true"></span>
+      </a></li>
+      <li data-reveal><a class="thumb thumb--salle" href="img/photos/gal-salle-1024.webp" data-full="img/photos/gal-salle-1024.webp" data-mid="img/photos/gal-salle-1024.webp" data-credit="Imagem de prévia substituída por placeholder gráfico; não representa fotografia do estabelecimento." aria-haspopup="dialog">
+        <img src="img/photos/gal-salle-thumb-480.webp" width="480" height="640" loading="lazy" decoding="async" alt="Placeholder gráfico para demonstração pública; não é uma fotografia do estabelecimento.">
+        <span class="thumb__zoom" aria-hidden="true"></span>
+      </a></li>
+      <li data-reveal style="--rd:70ms"><a class="thumb thumb--bieres" href="img/photos/gal-bieres-1024.webp" data-full="img/photos/gal-bieres-1024.webp" data-mid="img/photos/gal-bieres-1024.webp" data-credit="Imagem de prévia substituída por placeholder gráfico; não representa fotografia do estabelecimento." aria-haspopup="dialog">
+        <img src="img/photos/gal-bieres-thumb-480.webp" width="480" height="640" loading="lazy" decoding="async" alt="Dois copos de cerveja Maes numa mesa de madeira.">
+        <span class="thumb__zoom" aria-hidden="true"></span>
+      </a></li>
+      <li data-reveal style="--rd:140ms"><a class="thumb thumb--jeux" href="img/photos/gal-jeux-1600.webp" data-full="img/photos/gal-jeux-1600.webp" data-mid="img/photos/gal-jeux-1024.webp" data-credit="Imagem de prévia substituída por placeholder gráfico; não representa fotografia do estabelecimento." aria-haspopup="dialog">
+        <img src="img/photos/gal-jeux-thumb-480.webp" width="480" height="360" loading="lazy" decoding="async" alt="Placeholder gráfico para demonstração pública; não é uma fotografia do estabelecimento.">
+        <span class="thumb__zoom" aria-hidden="true"></span>
+      </a></li>
+    </ul>
+  </section>
+
+  <!-- ░░ VENIR ░░ -->
+  <section class="visit" id="venir" aria-labelledby="visit-title" data-glow>
+   <div class="glow" aria-hidden="true"></div>
+   <div class="visit__inner">
+    <h2 id="visit-title" class="visit__title">
+        <span class="visit__number" data-split>232</span>
+        <span class="visit__street" data-reveal>rue Haute <span class="visit__city">Marolles · 1000 Bruxelas</span></span>
+      </h2>
+    <div class="visit__main">
+      <div class="visit__hours" data-reveal style="--rd:80ms">
+        <div class="visit__hours-head">
+          <p class="visit__value">Horários</p>
+          <p class="badge">Até as 2 h no fim de semana</p>
+        </div>
+        <table class="hours">
+          <caption class="visually-hidden">Horários publicados na ficha do Google Maps</caption>
+          <tbody>
+            <tr><th scope="row">Segunda – quinta</th><td>10 h – 23 h</td></tr>
+            <tr><th scope="row">Sexta</th><td>10 h – 2 h</td></tr>
+            <tr><th scope="row">Sábado</th><td>11 h – 2 h</td></tr>
+            <tr><th scope="row">Domingo</th><td>11 h – 23 h</td></tr>
+          </tbody>
+        </table>
+        <p class="visit__note">Segundo a ficha do Google Maps, consultada em 11/11/2026; não confirmados pelo bar. Outras fontes divergem (Privateaser: sábado a partir das 10 h, domingo a partir das 10 h 30). Feriados: horários possivelmente diferentes.</p>
+      </div>
+      <div class="visit__actions" data-reveal style="--rd:160ms">
+        <a class="btn btn--amber btn--xl" href="https://www.google.com/maps/dir/?api=1&amp;destination=Le%20Petit%20Lion%2C%20Rue%20Haute%20232%2C%201000%20Bruxelles" target="_blank" rel="noopener" data-magnetic>
+          <span class="btn__face">Rota até a rue Haute 232 <span aria-hidden="true">→</span></span>
+        </a>
+        <p class="visit__contact">
+          <a href="https://www.google.com/maps/place/Le+Petit+Lion/@50.8369613,4.3487024,17z/data=!4m6!3m5!1s0x47c3c464c616e459:0xcef2ec5c5101c5be!8m2!3d50.8369613!4d4.3487024!16s%2Fg%2F1tdzkq_0" target="_blank" rel="noopener">Ver a ficha no Google Maps</a>
+          <span aria-hidden="true">·</span>
+          <a href="tel:+3225124381">+32 2 512 43 81</a>
+        </p>
+        <div class="visit__links" data-social></div>
+      </div>
+    </div>
+    <figure class="visit__photo" data-reveal style="--rd:120ms">
+      <div class="visit__photo-frame">
+        <img src="img/photos/venir-entree-800.webp" srcset="img/photos/venir-entree-480.webp 480w, img/photos/venir-entree-800.webp 800w, img/photos/venir-entree-1200.webp 1200w"
+             sizes="(min-width: 56rem) 40vw, 100vw" width="800" height="600" loading="lazy" decoding="async"
+             alt="A entrada do Petit Lion: letreiro vermelho “petit lion”, toldo “1908”, vitrines de madeira e cadeiras vermelhas na calçada.">
+      </div>
+      <figcaption>A entrada, na rue Haute 232. Imagem placeholder demonstrativo.</figcaption>
+    </figure>
+   </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="foot__mark" aria-hidden="true">le petit lion</p>
+  <div class="foot__cols">
+    <div>
+      <p class="foot__label">Sobre esta página</p>
+      <p>Projeto demonstrativo independente. Fotografias autorizadas apenas para prévia local foram substituídas por placeholders gráficos na versão pública.</p>
+    </div>
+    <div>
+      <p class="foot__label">Fontes</p>
+      <ul class="foot__list">
+        <li><a href="https://journalisme.ulb.ac.be/longform/le-petit-lion-lauthenticite-a-lepreuve-de-la-gentrification/" target="_blank" rel="noopener">ULB Journalisme (2022)</a>: estaminet das Marolles</li>
+        <li><a href="https://www.google.com/maps/place/Le+Petit+Lion/@50.8369613,4.3487024,17z/data=!4m6!3m5!1s0x47c3c464c616e459:0xcef2ec5c5101c5be!8m2!3d50.8369613!4d4.3487024!16s%2Fg%2F1tdzkq_0" target="_blank" rel="noopener">Ficha do Google Maps</a>: endereço, horários, telefone; sinuca, pebolim e fliperama citados nas avaliações</li>
+        <li><a href="https://www.facebook.com/pages/Le-Petit-Lion/268335109901475" target="_blank" rel="noopener">Página no Facebook</a>: página não oficial, mesmo endereço e mesmo telefone</li>
+        <li><a href="https://mapstr.com/place/2LVV8RHOh5g" target="_blank" rel="noopener">Mapstr</a> e <a href="https://www.privateaser.com/lieu/46656-le-petit-lion" target="_blank" rel="noopener">Privateaser</a>: sinuca, pebolim</li>
+        <li>Consultadas em 11/11/2026. Horários não confirmados pelo bar.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="foot__label">Créditos</p>
+      <ul class="foot__list">
+        <li>Fotos do bar (ficha do Google Maps, consultada em 11/11/2026): Aïcha Benaziza (salão, abertura); Presidente De Internet (salão, celular e galeria); Cél. D. (balcão, sala de jogos); Mehmet Karamancı (fachada, entrada); RW (lousa); Yolanda Abad (cervejas). Direitos reservados aos autores.</li>
+        <li>Instrument Serif e Fredoka, <a href="fonts/OFL-InstrumentSerif.txt">SIL Open Font License 1.1</a> (<a href="fonts/OFL-Fredoka.txt">Fredoka</a>)</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<dialog class="viewer" aria-labelledby="viewer-title" data-viewer>
+  <div class="viewer__inner">
+    <h2 class="visually-hidden" id="viewer-title">Galeria de fotos</h2>
+    <figure class="viewer__figure">
+      <div class="viewer__frame"><img class="viewer__img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt=""></div>
+      <figcaption class="viewer__caption"><span class="viewer__alt"></span> <span class="viewer__pos" aria-live="polite"></span></figcaption>
+    </figure>
+    <div class="viewer__controls">
+      <button class="viewer__btn" type="button" data-prev aria-label="Foto anterior"><span aria-hidden="true">←</span></button>
+      <button class="viewer__btn" type="button" data-next aria-label="Próxima foto"><span aria-hidden="true">→</span></button>
+      <button class="viewer__btn viewer__close" type="button" data-close>Fechar</button>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>

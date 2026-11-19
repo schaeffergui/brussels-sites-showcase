@@ -1,0 +1,246 @@
+/* Schaeffer & Strey — Estudo de Caso Editorial (:8792/estudo-de-caso.html) */
+@import url("../fonts/schaeffer-fonts.css");
+
+:root{
+  --bg-ivory: #F3EEE6;
+  --bg-ivory-2: #EAE3D8;
+  --color-burgundy: #4B1F32;
+  --color-burgundy-deep: #381525;
+  --color-ink: #171417;
+  --color-ink-muted: #4D4549;
+  --color-stone: #B9B1A7;
+  --color-stone-soft: #DCD5CC;
+  --color-coral: #E56B5D;
+  --ivory-muted: #DDD4CA;
+
+  --display: "Rubik", system-ui, -apple-system, sans-serif;
+  --sans: "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif", Georgia, "Times New Roman", serif;
+
+  --col: min(100% - 2.5rem, 48rem);
+  --wide: min(100%, 1920px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: 5rem; -webkit-text-size-adjust: 100%; background: var(--bg-ivory); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--bg-ivory);
+  color: var(--color-ink);
+  font: 400 1.0625rem/1.62 var(--sans);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--color-burgundy); text-underline-offset: .22em; }
+a:hover { color: var(--color-ink); }
+a:focus-visible, video:focus-visible { outline: 3px solid var(--color-coral); outline-offset: 3px; border-radius: 4px; }
+
+.skip {
+  position: absolute; left: -999px; top: .5rem;
+  background: var(--color-burgundy); color: var(--bg-ivory);
+  padding: .65rem 1rem; z-index: 20;
+  font: 600 .9375rem/1 var(--sans); text-decoration: none; border-radius: 6px;
+}
+.skip:focus { left: .5rem; }
+
+/* Cabeçalho */
+.top {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  min-height: 4.25rem;
+  padding: 0 clamp(1rem, 3vw, 2.5rem);
+  background: rgba(243, 238, 230, .95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-stone-soft);
+}
+.brand {
+  display: inline-flex; align-items: center; gap: .65rem;
+  min-height: 44px; text-decoration: none; color: var(--color-burgundy);
+  flex-shrink: 0;
+}
+.brand__back {
+  font: 600 1rem/1 var(--sans);
+  color: var(--color-coral);
+}
+.brand__wordmark {
+  height: 19px; width: auto; max-width: min(52vw, 210px);
+  object-fit: contain; display: block;
+}
+.top nav { display: flex; gap: .15rem; overflow-x: auto; scrollbar-width: none; }
+.top nav a {
+  font: 500 .9rem/1 var(--sans); color: var(--color-ink);
+  text-decoration: none; white-space: nowrap;
+  padding: 0 .7rem; min-height: 44px;
+  display: inline-flex; align-items: center; border-radius: 999px;
+  transition: background-color .18s, color .18s;
+}
+.top nav a:hover { background: var(--bg-ivory-2); color: var(--color-burgundy); }
+@media (max-width: 56rem) { .top nav { display: none; } }
+
+/* Fluxo de Módulos */
+.case {
+  display: flex; flex-direction: column;
+  gap: clamp(2.5rem, 6vw, 4.75rem);
+  padding-bottom: 6rem;
+}
+.mod { margin: 0; }
+.mod--full { width: var(--wide); margin-inline: auto; }
+.mod--text { width: var(--col); margin-inline: auto; }
+.mod--img img, .mod--video video {
+  display: block; width: 100%; height: auto;
+  background: var(--bg-ivory-2);
+}
+.mod--video video { aspect-ratio: 16/9; object-fit: cover; }
+.mod--video figcaption {
+  width: var(--col); margin: .85rem auto 0;
+  font: 400 .9375rem/1.5 var(--sans); color: var(--color-ink-muted);
+}
+.mod--video figcaption a {
+  margin-left: .45rem; white-space: nowrap;
+  font-weight: 600; color: var(--color-burgundy);
+}
+.mod--grid {
+  width: var(--wide); margin-inline: auto;
+  display: grid; grid-template-columns: 1fr; gap: clamp(.5rem, 1vw, 1rem);
+}
+@media (min-width: 60rem) { .mod--grid { grid-template-columns: 1fr 1fr; } }
+
+/* Faixa de rascunho */
+.draft {
+  width: var(--col); margin: 1.5rem auto 0;
+  padding: .8rem 1.15rem;
+  border: 1.5px dashed var(--color-burgundy);
+  border-radius: 8px;
+  color: var(--color-burgundy);
+  background: var(--bg-ivory-2);
+  font: 600 .9rem/1.45 var(--sans);
+  text-align: center;
+}
+
+/* Tipografia Editorial */
+.studio-seal {
+  display: inline-flex; align-items: center; gap: .6rem;
+  margin-bottom: 1rem;
+  padding: .35rem .85rem .35rem .45rem;
+  border-radius: 999px;
+  background: var(--color-burgundy);
+  color: var(--bg-ivory);
+  font: 500 .78rem/1 var(--sans);
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.studio-seal img { width: 22px; height: 22px; border-radius: 50%; display: block; }
+
+.eyebrow {
+  font: 600 .8125rem/1.3 var(--sans);
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--color-burgundy);
+  margin: 0 0 .9rem;
+}
+h1, h2, .h2s {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  margin: 0;
+  color: var(--color-ink);
+}
+h1 { font-size: clamp(2.4rem, 5.8vw, 4.4rem); }
+h1 i {
+  font-family: var(--serif); font-weight: 400; font-style: italic;
+  color: var(--color-burgundy); letter-spacing: -0.01em;
+}
+h2 { font-size: clamp(2rem, 4.4vw, 3.25rem); }
+.h2s { font-size: clamp(1.85rem, 3.6vw, 2.6rem); margin-bottom: 1.5rem; }
+h3 {
+  font: 600 1rem/1.3 var(--display);
+  letter-spacing: -0.01em;
+  color: var(--color-burgundy);
+  margin: 1.6rem 0 .45rem;
+}
+.lede {
+  font: 400 clamp(1.125rem, 1.7vw, 1.32rem)/1.55 var(--serif);
+  color: var(--color-ink);
+  margin: 1.25rem 0 0;
+}
+.note {
+  font: 400 .9375rem/1.55 var(--sans);
+  color: var(--color-ink-muted);
+  border-left: 3px solid var(--color-coral);
+  padding: .35rem 0 .35rem 1.05rem;
+  margin: 1.6rem 0 0;
+}
+.intro { text-align: center; }
+.intro .note { text-align: left; }
+
+/* Seções por projeto */
+.proj {
+  display: flex; flex-direction: column;
+  gap: clamp(2rem, 4.5vw, 3.5rem);
+  padding-top: clamp(2.4rem, 5vw, 4.2rem);
+  border-top: 1px solid var(--color-stone);
+}
+.proj__head { text-align: center; }
+.proj__head h2 {
+  font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+  max-width: 20ch; margin-inline: auto;
+  color: var(--color-ink);
+}
+
+.cols {
+  display: grid; gap: 1.6rem 3rem;
+  width: min(100% - 2.5rem, 68rem);
+}
+@media (min-width: 52rem) { .cols { grid-template-columns: 1.2fr 1fr; } }
+.cols h3:first-child { margin-top: 0; }
+.cols p { margin: 0; color: var(--color-ink); }
+.cols ul { margin: 0; padding-left: 1.15rem; color: var(--color-ink); }
+.cols li { margin: .28rem 0; }
+.cols ul + h3, .cols p + h3 { margin-top: 1.6rem; }
+
+.ficha__dl { display: grid; grid-template-columns: 1fr; gap: .2rem; margin: 0; }
+.ficha__dl dt {
+  font: 600 .875rem/1.4 var(--sans);
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--color-burgundy);
+  margin-top: .75rem;
+}
+.ficha__dl dd { margin: 0; color: var(--color-ink); font-size: .96875rem; }
+.open { margin-top: 1.2rem !important; }
+.open a {
+  display: inline-flex; align-items: center; gap: .45rem;
+  min-height: 44px; padding: .55rem 1.2rem;
+  border-radius: 999px;
+  background: var(--color-burgundy); color: var(--bg-ivory);
+  font: 600 .9rem/1 var(--sans); text-decoration: none;
+  transition: background-color .18s, color .18s;
+}
+.open a:hover { background: var(--color-coral); color: var(--color-ink); }
+
+/* Ficha técnica final em bloco Burgundy */
+.ficha {
+  width: min(100% - 2.5rem, 68rem);
+  padding: clamp(2rem, 4.5vw, 3.25rem);
+  border-radius: 14px;
+  background: var(--color-burgundy);
+  color: var(--bg-ivory);
+}
+.ficha .h2s { color: var(--bg-ivory); }
+.ficha__brand {
+  display: flex; align-items: center; gap: .85rem; margin-bottom: 1.25rem;
+}
+.ficha__brand img { height: 18px; width: auto; }
+.ficha dl { display: grid; grid-template-columns: 1fr; gap: .25rem 2rem; margin: 0; }
+@media (min-width: 40rem) { .ficha dl { grid-template-columns: 10rem 1fr; } }
+.ficha dt {
+  font: 600 .875rem/1.5 var(--sans);
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--color-coral);
+  margin-top: .85rem;
+}
+.ficha dd { margin: 0; margin-top: .85rem; color: var(--ivory-muted); }
+@media (max-width: 39.99rem) { .ficha dd { margin-top: 0; } }
+.ficha .note {
+  color: var(--ivory-muted);
+  border-left-color: var(--color-coral);
+}

@@ -1,0 +1,6 @@
+# Private review artifacts
+photo-src*/
+backups/
+browser-screenshots/
+*.before-polish
+*.local

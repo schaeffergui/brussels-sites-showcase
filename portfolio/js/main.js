@@ -93,6 +93,67 @@ function initStage() {
   });
 }
 
+// ---- Cinco cenas guiadas pela rolagem nativa; sem animação em movimento reduzido ----
+function initShowreel() {
+  const section = document.querySelector('[data-showreel]');
+  if (!section) return;
+  const track = section.querySelector('[data-showreel-track]');
+  const sticky = section.querySelector('.showreel__sticky');
+  const scenes = [...section.querySelectorAll('[data-showreel-scene]')];
+  const count = section.querySelector('[data-showreel-count]');
+  const progressBar = section.querySelector('[data-showreel-progress]');
+  let queued = false;
+
+  const reset = () => {
+    section.classList.remove('is-cinematic');
+    scenes.forEach((scene) => {
+      scene.classList.remove('is-active', 'is-visible');
+      scene.style.opacity = '';
+      scene.removeAttribute('aria-hidden');
+      scene.querySelector('a').removeAttribute('tabindex');
+      scene.querySelector('.showreel__visual').style.transform = '';
+      scene.querySelector('.showreel__copy').style.transform = '';
+    });
+    count.textContent = '05 projetos';
+    progressBar.style.width = '100%';
+  };
+
+  const paint = () => {
+    queued = false;
+    if (reduced()) return;
+    const rect = track.getBoundingClientRect();
+    const stickyTop = parseFloat(getComputedStyle(sticky).top) || 0;
+    const range = Math.max(1, track.offsetHeight - sticky.offsetHeight);
+    const progress = Math.max(0, Math.min(1, (stickyTop - rect.top) / range));
+    const phase = progress * (scenes.length - 1);
+    const active = Math.min(scenes.length - 1, Math.round(phase));
+    scenes.forEach((scene, i) => {
+      const distance = i - phase;
+      scene.style.opacity = i === active ? '1' : '0';
+      scene.classList.toggle('is-visible', i === active);
+      scene.classList.toggle('is-active', i === active);
+      scene.setAttribute('aria-hidden', String(i !== active));
+      scene.querySelector('a').tabIndex = i === active ? 0 : -1;
+      scene.querySelector('.showreel__visual').style.transform = `translate3d(${(distance * 8).toFixed(2)}%,0,0) scale(${(1.04 + Math.abs(distance) * .08).toFixed(3)}) rotate(${(distance * .8).toFixed(2)}deg)`;
+      scene.querySelector('.showreel__copy').style.transform = `translate3d(${(-distance * 14).toFixed(2)}px,0,0)`;
+    });
+    count.textContent = `${String(active + 1).padStart(2, '0')} / ${String(scenes.length).padStart(2, '0')}`;
+    progressBar.style.width = `${(20 + progress * 80).toFixed(1)}%`;
+  };
+
+  const requestPaint = () => {
+    if (!queued && !reduced()) { queued = true; requestAnimationFrame(paint); }
+  };
+  const mode = () => {
+    if (reduced()) reset();
+    else { section.classList.add('is-cinematic'); requestPaint(); }
+  };
+  addEventListener('scroll', requestPaint, { passive: true });
+  addEventListener('resize', requestPaint, { passive: true });
+  mqReduce.addEventListener('change', mode);
+  mode();
+}
+
 // ---- Filtro por segmento ----
 function initFilter() {
   const bar = document.querySelector('[data-filters]');
@@ -180,6 +241,7 @@ function initViewer() {
 
 run('reveal', initReveal);
 run('stage', initStage);
+run('showreel', initShowreel);
 run('filter', initFilter);
 run('viewer', initViewer);
 document.querySelectorAll('main img').forEach((im) => im.addEventListener('error', () => im.closest('figure')?.classList.add('is-missing')));

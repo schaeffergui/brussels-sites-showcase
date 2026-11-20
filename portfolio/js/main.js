@@ -58,22 +58,39 @@ function initReveal() {
 function initStage() {
   const stage = document.querySelector('[data-stage]');
   if (!stage) return;
+  const cover = document.querySelector('.cover');
   const layers = [...stage.querySelectorAll('[data-depth]')];
-  let raf = 0, tx = 0, ty = 0, cx = 0, cy = 0;
-  const frame = () => {
-    raf = 0; cx += (tx - cx) * 0.12; cy += (ty - cy) * 0.12;
-    layers.forEach((l) => { const d = +l.dataset.depth; l.style.translate = `${(cx * d * 10).toFixed(2)}px ${(cy * d * 8).toFixed(2)}px`; });
-    if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) raf = requestAnimationFrame(frame);
+  let raf = 0, tx = 0, ty = 0, cx = 0, cy = 0, tp = 0, cp = 0;
+  const progress = () => {
+    const r = stage.getBoundingClientRect();
+    return Math.max(0, Math.min(1, (innerHeight * .85 - r.top) / (innerHeight * .85 + r.height * .7)));
   };
-  document.querySelector('.cover').addEventListener('pointermove', (e) => {
+  const frame = () => {
+    raf = 0; cx += (tx - cx) * 0.12; cy += (ty - cy) * 0.12; cp += (tp - cp) * .12;
+    stage.style.setProperty('--stage-progress', cp.toFixed(4));
+    layers.forEach((l) => { const d = +l.dataset.depth; l.style.translate = `${(cx * d * 10).toFixed(2)}px ${(cy * d * 8).toFixed(2)}px`; });
+    if (Math.abs(tx - cx) > .002 || Math.abs(ty - cy) > .002 || Math.abs(tp - cp) > .002) raf = requestAnimationFrame(frame);
+  };
+  const queue = () => { if (!raf) raf = requestAnimationFrame(frame); };
+  const updateScroll = () => { if (reduced()) return; tp = progress(); queue(); };
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  window.addEventListener('resize', updateScroll, { passive: true });
+  updateScroll();
+  cover.addEventListener('pointermove', (e) => {
     if (!mqFine.matches || reduced() || e.pointerType !== 'mouse') return;
     const r = stage.getBoundingClientRect();
     tx = Math.max(-1, Math.min(1, (e.clientX - r.left) / r.width * 2 - 1));
     ty = Math.max(-1, Math.min(1, (e.clientY - r.top) / r.height * 2 - 1));
-    if (!raf) raf = requestAnimationFrame(frame);
+    queue();
   }, { passive: true });
-  document.querySelector('.cover').addEventListener('pointerleave', () => { tx = ty = 0; if (!raf && !reduced()) raf = requestAnimationFrame(frame); });
-  mqReduce.addEventListener('change', () => { if (reduced()) { cancelAnimationFrame(raf); raf = 0; layers.forEach((l) => { l.style.translate = ''; }); } });
+  cover.addEventListener('pointerleave', () => { tx = ty = 0; if (!reduced()) queue(); });
+  mqReduce.addEventListener('change', () => {
+    if (reduced()) {
+      cancelAnimationFrame(raf); raf = 0; tx = ty = cx = cy = tp = cp = 0;
+      stage.style.removeProperty('--stage-progress');
+      layers.forEach((l) => { l.style.translate = ''; });
+    } else updateScroll();
+  });
 }
 
 // ---- Filtro por segmento ----
